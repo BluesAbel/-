@@ -1,17 +1,11 @@
-1.安装vue-loader
+import Vue from 'vue';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import App from './App.vue';
 
-cnpm install vue-loader --save-dev
-2.loader配置
+Vue.use(ElementUI);
 
-npm install sass-loader node-sass --save-dev
-3.使用
-
-<style scoped lang="scss">
-	$primary-color: #666; 
-	$width:100px;
-	
-	.box{
-		width:$width;height:$width;
-		background:$primary-color;
-	}
- 
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});
