@@ -1,1 +1,18 @@
-<el-input v-model="input" placeholder="请输入内容"></el-input>
+func postFile(){
+    //这是一个Post 参数会被返回的地址
+    strinUrl:="http://localhost:8080/aaa"
+    byte,err:=ioutil.ReadFile("post.txt")
+    resopne,err  :=http.Post(strinUrl,"multipart/form-data",bytes.NewReader(byte))
+    if err !=nil {
+        fmt.Println("err=",err)
+    }
+    defer func() {
+        resopne.Body.Close()
+        fmt.Println("finish")
+    }()
+    body,err:=ioutil.ReadAll(resopne.Body)
+    if err!=nil {
+        fmt.Println(" post err=",err)
+    }
+    fmt.Println(string(body))
+}
