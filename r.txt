@@ -1,1 +1,1 @@
-go get github.com/mitchellh/mapstructure
+<el-input v-model="input" placeholder="请输入内容"></el-input>
