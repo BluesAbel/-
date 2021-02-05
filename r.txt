@@ -1,13 +1,1 @@
-var fromData2 = new FormData();
-			formData.append("blob",content);
-			
-			//ajax上传formData
-			 $.ajax({
-				url:'upload',
-				type:'POST',
-				data:formData,
-				processData:false,
-				contentType:false,
-				success:function (data) {
-				}
-			 });
+go get github.com/mitchellh/mapstructure
