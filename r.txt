@@ -1,18 +1,17 @@
-func postFile(){
-    //这是一个Post 参数会被返回的地址
-    strinUrl:="http://localhost:8080/aaa"
-    byte,err:=ioutil.ReadFile("post.txt")
-    resopne,err  :=http.Post(strinUrl,"multipart/form-data",bytes.NewReader(byte))
-    if err !=nil {
-        fmt.Println("err=",err)
-    }
-    defer func() {
-        resopne.Body.Close()
-        fmt.Println("finish")
-    }()
-    body,err:=ioutil.ReadAll(resopne.Body)
-    if err!=nil {
-        fmt.Println(" post err=",err)
-    }
-    fmt.Println(string(body))
+bodyBuf := &bytes.Buffer{}
+bodyWriter := multipart.NewWriter(bodyBuf)
+_ = bodyWriter.WriteField("param", string(param))
+defer bodyWriter.Close()
+
+req, err := http.NewRequest("POST", callbackUrl, bodyBuf)
+if err != nil {
+	return nil, err
 }
+req.Header.Set("Content-Type", bodyWriter.FormDataContentType())
+req.WithContext(ctx)
+
+resp, err := http.DefaultClient.Do(req)
+if err != nil {
+	return nil, err
+}
+defer resp.Body.Close()
