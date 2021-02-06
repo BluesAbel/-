@@ -1,17 +1,1 @@
-bodyBuf := &bytes.Buffer{}
-bodyWriter := multipart.NewWriter(bodyBuf)
-_ = bodyWriter.WriteField("param", string(param))
-defer bodyWriter.Close()
-
-req, err := http.NewRequest("POST", callbackUrl, bodyBuf)
-if err != nil {
-	return nil, err
-}
-req.Header.Set("Content-Type", bodyWriter.FormDataContentType())
-req.WithContext(ctx)
-
-resp, err := http.DefaultClient.Do(req)
-if err != nil {
-	return nil, err
-}
-defer resp.Body.Close()
+req.Header.Add("Content-Type", "application/json")
