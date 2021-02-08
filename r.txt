@@ -1,14 +1,12 @@
-var buff bytes.Buffer
-	writer := multipart.NewWriter(&buff)
-	// 添加form表单参数, 可以添加多个
-	writer.WriteField("route_str", "xiaofei/1d7608ac3d4bdaa28c0bdc1805f03fc2.jpg")
-	w, _ := writer.CreateFormFile("file_stream", "ywdhzxf.jpg")
-	fd1, _ := os.Open("/Users/xiaofei/Downloads/ywdhzxf.jpg")
-	defer fd1.Close()
-	// 把文件流写入到缓冲区里去
-	_, _ = io.Copy(w, fd1)
-	writer.Close()
-	//w.Write([]byte("this is a byte"))  如果有字节流直接写入就可以
-	var client http.Client
-	// 发送请求
-	resp, err := client.Post("http://127.0.0.1/pic/upload", writer.FormDataContentType(), &buff)
+<el-upload
+  class="upload-demo"
+  ref="upload"
+  action="https://jsonplaceholder.typicode.com/posts/"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove"
+  :file-list="fileList"
+  :auto-upload="false">
+  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+</el-upload>
