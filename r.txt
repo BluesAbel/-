@@ -1,17 +1,23 @@
-// 这里设置发送者的IP地址，自己查看一下自己的IP自行设定
-	laddr := net.UDPAddr{
-		IP:   net.IPv4(192, 168, 137, 224),
-		Port: 3000,
-	}
-	// 这里设置接收者的IP地址为广播地址
-	raddr := net.UDPAddr{
-		IP:   net.IPv4(255, 255, 255, 255),
-		Port: 3000,
-	}
-	conn, err := net.DialUDP("udp", &laddr, &raddr)
-	if err != nil {
-		println(err.Error())
-		return
-	}
-	conn.Write([]byte(`hello peers`))
-	conn.Close()
+<?xml version="1.0" encoding="utf-8"?>
+<Envelope xmlns:dn="http://www.onvif.org/ver10/network/wsdl" 
+xmlns="http://www.w3.org/2003/05/soap-envelope">
+<Header>
+<wsa:MessageID xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+uuid:25862dc4-4866-42a9-87a7-edcf2918ab10
+</wsa:MessageID>
+<wsa:To xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+urn:schemas-xmlsoap-org:ws:2005:04:discovery
+</wsa:To>
+<wsa:Action xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+http://schemas.xmlsoap.org/ws/2005/04/discovery/Probe
+</wsa:Action>
+</Header>
+<Body>
+<Probe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns="http://schemas.xmlsoap.org/ws/2005/04/discovery">
+<Types>dn:NetworkVideoTransmitter</Types>
+<Scopes />
+</Probe>
+</Body>
+</Envelope>
